@@ -5,6 +5,10 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public partial class CursorController : MonoBehaviour {
+
+    public SpriteRenderer cusor;
+    public Sprite down, up;
+
     public DualGridTilemap dualGridTilemap;
     void Update() {
         var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -14,8 +18,14 @@ public partial class CursorController : MonoBehaviour {
 
         if (Input.GetMouseButton(0)) {
             dualGridTilemap.SetCell(tilePos, dualGridTilemap.dirtPlaceholderTile);
+            cusor.sprite = down;
         } else if (Input.GetMouseButton(1)) {
             dualGridTilemap.SetCell(tilePos, dualGridTilemap.grassPlaceholderTile);
+            cusor.sprite = down;
+        }
+        else if (Input.GetMouseButtonUp(0)|| Input.GetMouseButtonUp(1))
+        {
+            cusor.sprite = up;
         }
     }
 
